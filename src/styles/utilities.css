@@ -1,0 +1,14 @@
+@layer utilities {
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  .btn-hero {
+    @apply text-primary-foreground bg-gradient-primary shadow-glow hover:opacity-95 transition-[filter,opacity] duration-300 ease-out;
+  }
+}
