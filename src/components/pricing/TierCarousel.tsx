@@ -11,7 +11,7 @@ export const TierCarousel = ({ title, subtitle, items }: TierCarouselProps) => {
   return (
     <section className="container py-12">
       <header className="mb-6">
-        <h2 className="text-3xl font-bold tracking-tight">{title}</h2>
+        <h2 className="text-3xl font-extrabold tracking-tight animate-header text-shadow-hero">{title}</h2>
         {subtitle && <p className="text-muted-foreground mt-2">{subtitle}</p>}
       </header>
       <div className="relative">

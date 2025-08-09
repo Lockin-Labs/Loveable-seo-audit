@@ -255,7 +255,7 @@ const Pricing = () => {
         canonical="/pricing"
       />
       <section className="container py-12">
-        <h1 className="text-4xl font-bold tracking-tight">Pricing Guide</h1>
+        <h1 className="text-4xl font-extrabold tracking-tight animate-header text-shadow-hero">Pricing Guide</h1>
         <p className="mt-2 text-muted-foreground">
           Choose a plan that fits your needs. Upgrade anytime.
         </p>

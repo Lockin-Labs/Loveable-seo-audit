@@ -14,7 +14,7 @@ const Index = () => {
       <section className="relative overflow-hidden">
         <div className="container grid gap-8 py-20 lg:grid-cols-2 lg:gap-12">
           <div className="relative z-10">
-            <h1 className="text-5xl font-extrabold tracking-tight leading-tight">
+            <h1 className="text-5xl font-extrabold tracking-tight leading-tight animate-header text-shadow-hero">
               Automate SEO Audits, Amazon Scraping, and Sheets Cleaning
             </h1>
             <p className="mt-4 text-lg text-muted-foreground max-w-prose">
