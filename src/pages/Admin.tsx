@@ -1,5 +1,6 @@
 import { Seo } from "@/components/site/Seo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 const data = [
@@ -10,6 +11,13 @@ const data = [
   { name: "Fri", tasks: 58, revenue: 340 },
   { name: "Sat", tasks: 44, revenue: 260 },
   { name: "Sun", tasks: 29, revenue: 150 },
+];
+
+const users = [
+  { name: "Alice Lee", email: "alice@company.com", role: "admin", tasks: 124, status: "active", lastActive: "2m ago" },
+  { name: "Bob Smith", email: "bob@company.com", role: "moderator", tasks: 86, status: "active", lastActive: "12m ago" },
+  { name: "Chris Wong", email: "chris@company.com", role: "user", tasks: 42, status: "inactive", lastActive: "2d ago" },
+  { name: "Dana Fox", email: "dana@company.com", role: "user", tasks: 15, status: "active", lastActive: "1h ago" },
 ];
 
 const HealthRow = ({ label, status }: { label: string; status: "ok" | "warn" | "down" }) => {
@@ -32,7 +40,7 @@ const Admin = () => {
     <>
       <Seo title="Admin Dashboard - SEO Audit & Data Services" description="Real-time task metrics, revenue reports, user management, and system health checks." canonical="/admin" />
       <section className="container py-8">
-        <h1 className="text-3xl font-bold tracking-tight">Admin Dashboard</h1>
+        <h1 className="text-3xl font-extrabold tracking-tight animate-header text-shadow-hero">Admin Dashboard</h1>
         <p className="text-muted-foreground mt-1">Real-time metrics and system health</p>
         <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           <Card className="shadow-elevated">
@@ -98,6 +106,45 @@ const Admin = () => {
               <HealthRow label="Crawler Pool" status="warn" />
               <HealthRow label="Storage" status="ok" />
               <HealthRow label="Payments" status="ok" />
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="mt-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>User Management</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>User</TableHead>
+                    <TableHead>Role</TableHead>
+                    <TableHead>Tasks</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead className="text-right">Last Active</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {users.map((u, i) => (
+                    <TableRow key={i}>
+                      <TableCell>
+                        <div className="font-medium">{u.name}</div>
+                        <div className="text-muted-foreground text-xs">{u.email}</div>
+                      </TableCell>
+                      <TableCell className="capitalize">{u.role}</TableCell>
+                      <TableCell>{u.tasks}</TableCell>
+                      <TableCell>
+                        <span className={`rounded-full px-2 py-0.5 text-xs ${u.status === "active" ? "bg-green-100 text-green-700" : "bg-muted text-muted-foreground"}`}>
+                          {u.status}
+                        </span>
+                      </TableCell>
+                      <TableCell className="text-right">{u.lastActive}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
             </CardContent>
           </Card>
         </div>

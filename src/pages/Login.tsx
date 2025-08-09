@@ -1,12 +1,17 @@
 import { Seo } from "@/components/site/Seo";
 import { Button } from "@/components/ui/button";
-
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 const Login = () => {
-  const handleMicrosoftLogin = () => {
-    // Placeholder for Azure AD auth integration
-    window.location.href = "/auth/microsoft";
+  const handleMicrosoftLogin = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "azure",
+      options: { redirectTo: `${window.location.origin}/dashboard` },
+    });
+    if (error) {
+      toast({ title: "Login failed", description: error.message });
+    }
   };
-
   return (
     <>
       <Seo title="Login - SEO Audit & Data Services" description="Sign in with Microsoft Azure AD to access your dashboard and tasks." canonical="/login" />

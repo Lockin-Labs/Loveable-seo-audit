@@ -5,12 +5,12 @@ import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
 
 const AmazonScrapingSubmit = () => {
-  const [keywords, setKeywords] = useState("");
-  const [maxProducts, setMaxProducts] = useState(50);
+  const [url, setUrl] = useState("");
+  const [tier, setTier] = useState<"Basic ($5)" | "Premium ($15)">("Basic ($5)");
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "Task submitted!", description: `Amazon scraping queued for "${keywords}"` });
+    toast({ title: "Task submitted!", description: `Amazon scraping queued for ${url} – ${tier}` });
   };
 
   return (
@@ -25,12 +25,26 @@ const AmazonScrapingSubmit = () => {
           <CardContent>
             <form onSubmit={onSubmit} className="grid gap-4">
               <label className="grid gap-2">
-                <span className="text-sm font-medium">Keywords or ASINs</span>
-                <input required value={keywords} onChange={(e) => setKeywords(e.target.value)} placeholder="e.g., gaming laptop, B08N5WRWNW" className="h-10 rounded-md border bg-background px-3" />
+                <span className="text-sm font-medium">Amazon Product URL</span>
+                <input
+                  required
+                  type="url"
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                  placeholder="https://www.amazon.com/..."
+                  className="h-10 rounded-md border bg-background px-3"
+                />
               </label>
               <label className="grid gap-2">
-                <span className="text-sm font-medium">Max products</span>
-                <input type="number" min={10} max={2000} value={maxProducts} onChange={(e) => setMaxProducts(parseInt(e.target.value))} className="h-10 rounded-md border bg-background px-3" />
+                <span className="text-sm font-medium">Tier</span>
+                <select
+                  value={tier}
+                  onChange={(e) => setTier(e.target.value as "Basic ($5)" | "Premium ($15)")}
+                  className="h-10 rounded-md border bg-background px-3"
+                >
+                  <option>Basic ($5)</option>
+                  <option>Premium ($15)</option>
+                </select>
               </label>
               <Button type="submit" variant="hero">Submit Task</Button>
             </form>
