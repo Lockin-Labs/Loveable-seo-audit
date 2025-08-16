@@ -61,6 +61,11 @@ All colors MUST be HSL.
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-glow)) 50%, hsl(220 90% 56%) 100%);
     --shadow-elevated: 0 10px 30px -10px hsl(var(--primary) / 0.25);
     --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.35);
+    
+    /* Status indicator colors */
+    --status-processing: 0 84% 60%; /* Red */
+    --status-analyzing: 45 93% 58%;  /* Yellow */
+    --status-completed: 142 71% 45%; /* Green */
   }
 
   .dark {

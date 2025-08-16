@@ -1,32 +1,42 @@
 import { Seo } from "@/components/site/Seo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { StatusIndicator } from "@/components/ui/status-indicator";
+import { useRealtimeTasks } from "@/hooks/use-realtime";
 
 const mockTasks = [
-  { id: "T-1001", type: "SEO Audit", status: "Completed", createdAt: "2025-08-01", link: "#" },
-  { id: "T-1002", type: "Amazon Scraping", status: "Processing", createdAt: "2025-08-02", link: "#" },
-  { id: "T-1003", type: "Sheets Cleaning", status: "Queued", createdAt: "2025-08-03", link: "#" },
+  { id: "T-1001", type: "SEO Audit", status: "completed", createdAt: "2025-08-01", link: "#", progress: 100 },
+  { id: "T-1002", type: "Amazon Scraping", status: "analyzing", createdAt: "2025-08-02", link: "#", progress: 65 },
+  { id: "T-1003", type: "Sheets Cleaning", status: "processing", createdAt: "2025-08-03", link: "#", progress: 25 },
 ];
 
-const StatusPill = ({ status }: { status: string }) => {
-  const map: Record<string, string> = {
-    Completed: "bg-primary/10 text-primary",
-    Processing: "bg-accent text-accent-foreground",
-    Queued: "bg-muted text-muted-foreground",
-  };
+const StatusDisplay = ({ status, progress }: { status: string; progress: number }) => {
   return (
-    <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${map[status] || "bg-muted text-muted-foreground"}`}>
-      {status}
-    </span>
+    <div className="flex items-center gap-3">
+      <StatusIndicator status={status} />
+      <div className="flex flex-col">
+        <span className="text-sm font-medium capitalize">{status}</span>
+        <div className="w-20 h-1 bg-muted rounded-full overflow-hidden">
+          <div 
+            className="h-full bg-primary transition-all duration-300" 
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+        <span className="text-xs text-muted-foreground">{progress}%</span>
+      </div>
+    </div>
   );
 };
 
 const Dashboard = () => {
+  const { tasks, isLoading } = useRealtimeTasks();
+  const displayTasks = tasks.length > 0 ? tasks : mockTasks;
+
   return (
     <>
       <Seo title="Dashboard - SEO Audit & Data Services" description="View your task history, statuses, and download completed reports." canonical="/dashboard" />
       <section className="container py-10">
         <h1 className="text-3xl font-bold tracking-tight">Your Tasks</h1>
-        <p className="text-muted-foreground mt-2">History and downloads</p>
+        <p className="text-muted-foreground mt-2">Live updates • History and downloads</p>
 
         <Card className="mt-6">
           <CardHeader>
@@ -45,13 +55,21 @@ const Dashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {mockTasks.map((t) => (
+                  {displayTasks.map((t) => (
                     <tr key={t.id} className="border-t">
                       <td className="py-3 pr-4 font-medium">{t.id}</td>
                       <td className="py-3 pr-4">{t.type}</td>
-                      <td className="py-3 pr-4"><StatusPill status={t.status} /></td>
+                      <td className="py-3 pr-4">
+                        <StatusDisplay status={t.status} progress={t.progress} />
+                      </td>
                       <td className="py-3 pr-4">{t.createdAt}</td>
-                      <td className="py-3 pr-4"><a className="text-primary hover:underline" href={t.link}>Report</a></td>
+                      <td className="py-3 pr-4">
+                        {t.status === 'completed' ? (
+                          <a className="text-primary hover:underline" href={t.link}>Download</a>
+                        ) : (
+                          <span className="text-muted-foreground">Pending</span>
+                        )}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
