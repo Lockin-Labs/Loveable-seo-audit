@@ -3,14 +3,20 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
+import { submitSheetsTask } from "@/lib/azure-api";
 
 const SheetsCleaningSubmit = () => {
   const [sheetUrl, setSheetUrl] = useState("");
   const [rows, setRows] = useState(1000);
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "Task submitted!", description: `Sheets cleaning queued for ${sheetUrl}` });
+    try {
+      await submitSheetsTask(sheetUrl, rows);
+      toast({ title: "Task submitted!", description: `Sheets cleaning queued for ${sheetUrl}` });
+    } catch (error) {
+      toast({ title: "Error", description: "Failed to submit task. Please try again." });
+    }
   };
 
   return (

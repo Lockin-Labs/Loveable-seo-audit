@@ -1,9 +1,23 @@
 import { Seo } from "@/components/site/Seo";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
+import { loginWithMsal } from "@/lib/azure-auth";
 import { toast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
+
 const Login = () => {
+  const navigate = useNavigate();
+
   const handleMicrosoftLogin = async () => {
+    // Try MSAL authentication first
+    const account = await loginWithMsal();
+    if (account) {
+      toast({ title: "Login successful", description: "Welcome back!" });
+      navigate("/dashboard");
+      return;
+    }
+
+    // Fallback to Supabase OAuth
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "azure",
       options: { redirectTo: `${window.location.origin}/dashboard` },

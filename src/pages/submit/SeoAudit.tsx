@@ -3,14 +3,20 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
+import { submitSeoTask } from "@/lib/azure-api";
 
 const SeoAuditSubmit = () => {
   const [url, setUrl] = useState("");
   const [pages, setPages] = useState(3);
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "Task submitted!", description: `SEO audit queued for ${url}` });
+    try {
+      await submitSeoTask(url, pages);
+      toast({ title: "Task submitted!", description: `SEO audit queued for ${url}` });
+    } catch (error) {
+      toast({ title: "Error", description: "Failed to submit task. Please try again." });
+    }
   };
 
   return (
