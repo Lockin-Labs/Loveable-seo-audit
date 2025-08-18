@@ -1,9 +1,9 @@
 // Azure Function API endpoints and utilities
 
 const API_ENDPOINTS = {
-  amazon: "https://seo-audit-func.azurewebsites.net/api/amazon-scraper",
-  seo: "https://seo-audit-func.azurewebsites.net/api/seo-audit", 
-  sheets: "https://seo-audit-func.azurewebsites.net/api/sheets-cleaner"
+  amazon: "https://seoaudit-test-app.azurewebsites.net/api/amazon_scraper",
+  seo: "https://seoaudit-test-app.azurewebsites.net/api/seo_audit", 
+  sheets: "https://seoaudit-test-app.azurewebsites.net/api/sheets_cleaner"
 };
 
 export const submitTask = async (taskType: 'amazon' | 'seo' | 'sheets', data: any) => {
