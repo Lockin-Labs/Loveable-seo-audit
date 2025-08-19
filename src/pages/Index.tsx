@@ -29,10 +29,11 @@ const Index = () => {
             <div className="absolute inset-0 -z-10 bg-gradient-primary opacity-40 blur-2xl" />
             <iframe 
               src="https://tavus.video/180b684f60" 
-              className="h-full w-full rounded-xl border shadow-elevated"
+              className="w-full aspect-video rounded-xl border shadow-elevated"
               allow="autoplay; fullscreen"
               allowFullScreen
               title="Data automation demo video"
+              style={{ border: 'none' }}
             />
           </div>
         </div>
