@@ -27,7 +27,13 @@ const Index = () => {
           </div>
           <div className="relative">
             <div className="absolute inset-0 -z-10 bg-gradient-primary opacity-40 blur-2xl" />
-            <img src={heroImage} alt="Azure gradient showing data automation flow" className="h-full w-full rounded-xl border object-cover shadow-elevated" loading="lazy" />
+            <iframe 
+              src="https://tavus.video/180b684f60" 
+              className="h-full w-full rounded-xl border shadow-elevated"
+              allow="autoplay; fullscreen"
+              allowFullScreen
+              title="Data automation demo video"
+            />
           </div>
         </div>
       </section>
