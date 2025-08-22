@@ -29,7 +29,7 @@ const Index = () => {
           <div className="relative">
             <div className="absolute inset-0 -z-10 bg-gradient-primary opacity-40 blur-2xl" />
             <video 
-              src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+              src={heroVideo}
               className="w-full aspect-video rounded-xl shadow-elevated"
               autoPlay
               muted
