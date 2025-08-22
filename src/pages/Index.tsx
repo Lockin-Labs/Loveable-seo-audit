@@ -29,17 +29,13 @@ const Index = () => {
           <div className="relative">
             <div className="absolute inset-0 -z-10 bg-gradient-primary opacity-40 blur-2xl" />
             <video 
-              src={heroVideo}
+              src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
               className="w-full aspect-video rounded-xl shadow-elevated"
               autoPlay
               muted
               loop
               playsInline
-              controls={true}
-              onError={(e) => console.error('Video error:', e)}
-              onLoadStart={() => console.log('Video loading started')}
-              onCanPlay={() => console.log('Video can play')}
-              onLoadedData={() => console.log('Video loaded data')}
+              controls={false}
             />
           </div>
         </div>
