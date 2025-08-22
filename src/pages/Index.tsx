@@ -35,7 +35,11 @@ const Index = () => {
               muted
               loop
               playsInline
-              controls={false}
+              controls={true}
+              onError={(e) => console.error('Video error:', e)}
+              onLoadStart={() => console.log('Video loading started')}
+              onCanPlay={() => console.log('Video can play')}
+              onLoadedData={() => console.log('Video loaded data')}
             />
           </div>
         </div>
