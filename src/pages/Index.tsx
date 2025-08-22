@@ -1,4 +1,5 @@
 import heroImage from "@/assets/hero-azure.jpg";
+import heroVideo from "@/assets/hero-video.mp4";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Seo } from "@/components/site/Seo";
@@ -27,13 +28,14 @@ const Index = () => {
           </div>
           <div className="relative">
             <div className="absolute inset-0 -z-10 bg-gradient-primary opacity-40 blur-2xl" />
-            <iframe 
-              src="https://tavus.video/180b684f60" 
-              className="w-full aspect-video rounded-xl border shadow-elevated"
-              allow="autoplay; fullscreen"
-              allowFullScreen
-              title="Data automation demo video"
-              style={{ border: 'none' }}
+            <video 
+              src={heroVideo}
+              className="w-full aspect-video rounded-xl shadow-elevated"
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls={false}
             />
           </div>
         </div>
