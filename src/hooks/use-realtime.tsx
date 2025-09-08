@@ -1,41 +1,49 @@
 import { useState, useEffect } from 'react';
+import { getTasks, getTaskDownloadUrl } from "@/lib/azure-api";
+import { Task } from '@/types';
 
-interface Task {
-  id: string;
-  type: string;
-  status: 'processing' | 'analyzing' | 'completed' | string;
-  createdAt: string;
-  link: string;
-  progress: number;
-}
-
-export function useRealtimeTasks() {
+export const useRealtimeTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading
-    setIsLoading(false);
-    
-    // Simulate real-time updates for demo
-    const interval = setInterval(() => {
-      // This would be replaced with actual WebSocket or Server-Sent Events
-      // For now, just simulate progress updates
-      setTasks(prevTasks => 
-        prevTasks.map(task => {
-          if (task.status === 'processing' && task.progress < 100) {
-            const newProgress = Math.min(task.progress + Math.random() * 10, 100);
-            const newStatus = newProgress >= 100 ? 'completed' : 
-                            newProgress >= 50 ? 'analyzing' : 'processing';
-            return { ...task, progress: newProgress, status: newStatus };
-          }
-          return task;
-        })
-      );
-    }, 3000);
+    const fetchTasks = async () => {
+      try {
+        setIsLoading(true);
+        const fetchedTasks = await getTasks();
+        
+        // For completed tasks, fetch download URLs
+        const tasksWithDownloadUrls = await Promise.all(
+          fetchedTasks.map(async (task) => {
+            if (task.status === 'completed') {
+              try {
+                const downloadUrl = await getTaskDownloadUrl(task.id);
+                return { ...task, downloadUrl };
+              } catch (error) {
+                console.error(`Failed to fetch download URL for task ${task.id}:`, error);
+                return task;
+              }
+            }
+            return task;
+          })
+        );
+        
+        setTasks(tasksWithDownloadUrls);
+      } catch (error) {
+        console.error('Failed to fetch tasks:', error);
+        // Keep tasks as empty array on error
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchTasks();
+
+    // Set up polling for real-time updates every 30 seconds
+    const interval = setInterval(fetchTasks, 30000);
 
     return () => clearInterval(interval);
   }, []);
 
   return { tasks, isLoading };
-}
+};

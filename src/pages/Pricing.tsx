@@ -20,7 +20,8 @@ const Pricing = () => {
     },
     {
       name: "Basic",
-      price: "$7",
+      price: "$25",
+      originalPrice: "$35",
       features: [
         "10 pages analysis",
         "Basic meta tags analysis",
@@ -36,7 +37,8 @@ const Pricing = () => {
     },
     {
       name: "Premium",
-      price: "$18",
+      price: "$50",
+      originalPrice: "$65",
       popular: true,
       features: [
         "25 pages analysis",
@@ -55,7 +57,8 @@ const Pricing = () => {
     },
     {
       name: "Enterprise",
-      price: "$50",
+      price: "$79",
+        originalPrice: "$99",
       features: [
         "100+ pages analysis",
         "Full technical audit + PDF report",
@@ -74,7 +77,8 @@ const Pricing = () => {
     },
     {
       name: "Subscription",
-      price: "$40/mo",
+      price: "$95/mo",
+        originalPrice: "$119/mo",
       features: [
         "10 audits per month",
         "Monthly monitoring",
@@ -108,28 +112,18 @@ const Pricing = () => {
       href: "/submit/amazon-scraping",
     },
     {
-      name: "Basic",
-      price: "$5",
-      features: [
-        "50 products",
-        "Price data + Product titles",
-        "CSV format",
-        "Email support (48h response)",
-        "24-hour delivery",
-      ],
-      href: "/submit/amazon-scraping",
-    },
-    {
       name: "Premium",
-      price: "$15",
+      price: "$32",
+        originalPrice: "$40",
       popular: true,
       features: [
         "500 products",
-        "Ratings, Images, Competitors",
         "Price data + Product titles + Product images",
         "Ratings & Reviews + Stock status",
         "Competitor analysis",
+        "Price tracking",
         "CSV + Excel formats",
+        "API access",
         "Email support (24h response)",
         "1-hour delivery",
       ],
@@ -137,7 +131,8 @@ const Pricing = () => {
     },
     {
       name: "Ultra",
-      price: "$25",
+      price: "$79",
+        originalPrice: "$99",
       features: [
         "1000+ products",
         "Real-time pricing + API access",
@@ -153,7 +148,8 @@ const Pricing = () => {
     },
     {
       name: "Subscription",
-      price: "$40/mo",
+      price: "$95/mo",
+        originalPrice: "$119/mo",
       features: [
         "10 tasks per month",
         "Unlimited products",
@@ -183,27 +179,14 @@ const Pricing = () => {
       href: "/submit/sheets-cleaning",
     },
     {
-      name: "Basic",
-      price: "$5",
-      features: [
-        "1 sheet (1000 rows)",
-        "Dedupe + formatting",
-        "Duplicate removal + Data formatting",
-        "Data validation",
-        "One-time processing",
-        "Email support (48h response)",
-        "24-hour delivery",
-      ],
-      href: "/submit/sheets-cleaning",
-    },
-    {
       name: "Premium",
-      price: "$15",
+      price: "$25",
+      originalPrice: "$32",
       popular: true,
       features: [
         "5 sheets (10,000 rows each)",
-        "AI suggestions + formulas",
-        "All Basic features plus:",
+        "Duplicate removal + Data formatting",
+        "Data validation",
         "AI suggestions",
         "Formula creation",
         "Conditional formatting",
@@ -215,7 +198,8 @@ const Pricing = () => {
     },
     {
       name: "Complex",
-      price: "$30",
+      price: "$40",
+      originalPrice: "$50",
       features: [
         "20+ sheets (unlimited rows)",
         "VBA scripting + automation",
@@ -231,7 +215,8 @@ const Pricing = () => {
     },
     {
       name: "Subscription",
-      price: "$40/mo",
+      price: "$32/mo",
+      originalPrice: "$40/mo",
       features: [
         "10 tasks per month",
         "Unlimited sheets and rows",
@@ -262,7 +247,7 @@ const Pricing = () => {
       </section>
 
       <TierCarousel title="SEO Meta Audit Service" items={seoTiers} />
-      <TierCarousel title="Amazon Price Scraping Service" items={amazonTiers} />
+      <TierCarousel title="Amazon Scraper and SEO Insights" items={amazonTiers} />
       <TierCarousel title="Google Sheets Cleaning Service" items={sheetsTiers} />
     </>
   );

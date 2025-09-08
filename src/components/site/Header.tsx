@@ -13,7 +13,7 @@ const Header = () => {
         <Link to="/" className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-md bg-primary/10 ring-1 ring-primary/20" />
           <span className="text-base font-extrabold tracking-tight">
-            SEO Audit & Data Services
+            Lockin -Labs/TaskFlow SEO
           </span>
         </Link>
         <nav className="hidden items-center gap-1 md:flex">

@@ -2,6 +2,7 @@ import { Seo } from "@/components/site/Seo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatusIndicator } from "@/components/ui/status-indicator";
 import { useRealtimeTasks } from "@/hooks/use-realtime";
+import { Task } from "@/types";
 
 const mockTasks = [
   { id: "T-1001", type: "SEO Audit", status: "completed", createdAt: "2025-08-01", link: "#", progress: 100 },
@@ -64,8 +65,16 @@ const Dashboard = () => {
                       </td>
                       <td className="py-3 pr-4">{t.createdAt}</td>
                       <td className="py-3 pr-4">
-                        {t.status === 'completed' ? (
-                          <a className="text-primary hover:underline" href={t.link}>Download</a>
+                        {t.status === 'completed' && t.downloadUrl ? (
+                          <a 
+                            href={t.downloadUrl} 
+                            className="text-blue-600 hover:text-blue-800 underline"
+                            download
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Download
+                          </a>
                         ) : (
                           <span className="text-muted-foreground">Pending</span>
                         )}

@@ -59,6 +59,19 @@ This project is built with:
 - React
 - shadcn-ui
 - Tailwind CSS
+- Azure Application Insights
+- Sentry for error tracking and monitoring
+
+## Environment Variables
+
+This project uses environment variables for configuration. A `.env.example` file is provided with the required variables.
+
+1. Copy `.env.example` to `.env` for local development
+2. Set the following variables:
+   - `VITE_APPLICATIONINSIGHTS_CONNECTION_STRING`: Your Azure Application Insights connection string
+   - `VITE_APP_VERSION`: The current application version
+
+Environment variables are accessed using `import.meta.env.VARIABLE_NAME` in the code.
 
 ## How can I deploy this project?
 
