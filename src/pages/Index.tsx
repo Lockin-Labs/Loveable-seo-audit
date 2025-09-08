@@ -1,4 +1,5 @@
 import heroImage from "@/assets/hero-azure.jpg";
+import heroVideo from "@/assets/hero-video.mp4";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Seo } from "@/components/site/Seo";
@@ -27,7 +28,20 @@ const Index = () => {
           </div>
           <div className="relative">
             <div className="absolute inset-0 -z-10 bg-gradient-primary opacity-40 blur-2xl" />
-            <img src={heroImage} alt="Azure gradient showing data automation flow" className="h-full w-full rounded-xl border object-cover shadow-elevated" loading="lazy" />
+            <video 
+              src={heroVideo}
+              className="w-full aspect-video rounded-xl shadow-elevated"
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls={true}
+              onError={(e) => console.error('Video error:', e)}
+              onLoadStart={() => console.log('Video loading started')}
+              onCanPlay={() => console.log('Video can play')}
+              onLoadedData={() => console.log('Video loaded data')}
+              onPlay={() => console.log('Video is playing')}
+            />
           </div>
         </div>
       </section>
